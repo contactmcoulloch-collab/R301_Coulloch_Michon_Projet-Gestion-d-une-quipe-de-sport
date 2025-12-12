@@ -44,8 +44,7 @@ table, th, td {
     <td>".$row['nom']."</td>
     <td>".$row['prenom']."</td>
     <td>".$row['nLicence']."</td>
-    <td><a href='modification.php?nom=".$row['nom']."&prenom=".$row['prenom']."&adresse=".$row['adresse']."&codepost=".$row['codepost']."&ville=".$row['ville']."&telephone=".$row['telephone']."&trt=R'>Détails</a></td>";
-} 
+    <td><a href='modification.php?nom=".$row['nom']."&prenom=".$row['prenom']."&adresse=".$row['adresse']."&codepost=".$row['codepost']."&ville=".$row['ville']."&telephone=".$row['telephone']."&trt=R'>Détails</a></td>";} 
   echo"</table>";
   ?>
 </body>
