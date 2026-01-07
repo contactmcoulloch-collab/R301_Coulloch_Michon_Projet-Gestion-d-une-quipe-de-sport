@@ -1,54 +1,76 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="fr">
 <?php
-///Connexion au serveur MySQL
+/// Connexion MySQL
 $server='mysql-projetphp-michon-coulloch.alwaysdata.net:3306';
- $db='projetphp-michon-coulloch_bd';
- $login='442040_user';
- $mdp='$iutinfo';
-  try {
+$db='projetphp-michon-coulloch_bd';
+$login='442040_user';
+$mdp='$iutinfo';
+
+try {
     $linkpdo = new PDO("mysql:host=$server;dbname=$db", $login, $mdp);
-    }
-///Capture des erreurs éventuelles
-catch (Exception $e) {
-   die('Erreur : ' . $e->getMessage());
-      } 
+} catch (Exception $e) {
+    die('Erreur : ' . $e->getMessage());
+}
+
 $lreq = "SELECT * FROM JOUEUR";
 $req = $linkpdo->prepare($lreq);
 $req->execute();
-     ?>
-
+?>
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Mes Joueurs</title>
-</head>
-<body>
-    <a1>Liste des Joueurs</a1>
-    <style>
+<meta charset="UTF-8">
+<title>Mes Joueurs</title>
+<style>
 table, th, td {
   border:1px solid black;
 }
 </style>
-</br></br></br>
-<?php echo 
- "<table>
- <thead>
-    <tr>
-    <th>Identifiant</th>
-    <th>Nom</th>
-    <th>Prénom</th>
-    <th>N° de licence</th>
-    <th>Détails</th>
-  </tr></thead><tbody>";
-   while ($row = $req->fetch(PDO::FETCH_ASSOC)){
-    echo"
+</head>
+
+<body>
+<h2>Liste des joueurs</h2>
+
+<?php
+echo "<table>
+<thead>
+<tr>
+<th>ID</th>
+<th>Nom</th>
+<th>Prénom</th>
+<th>N° Licence</th>
+<th>Modifier</th>
+<th>Supprimer</th>
+
+</tr>
+</thead><tbody>";
+
+while ($row = $req->fetch(PDO::FETCH_ASSOC)) {
+    echo "<tr>
     <td>".$row['IDJOUEUR']."</td>
     <td>".$row['NOM']."</td>
     <td>".$row['PRENOM']."</td>
     <td>".$row['NUMERODELICENCE']."</td>
-    <td><a href='details.php?idjoueur=".$row['IDJOUEUR']."&trt=R'>Détails</a></td>";} 
-  echo"</table>";
-  ?>
+    <td>
+      <a href='modifJoueur.php?
+      idjoueur=".$row['IDJOUEUR']."&
+      nom=".$row['NOM']."&
+      prenom=".$row['PRENOM']."&
+      licence=".$row['NUMERODELICENCE']."&
+      trt=R'>Modifier</a>
+    </td>
+    <td>
+<a href='supprJoueur.php?
+idjoueur=".$row['IDJOUEUR']."&
+nom=".$row['NOM']."&
+prenom=".$row['PRENOM']."&
+licence=".$row['NUMERODELICENCE']."&
+trt=R'>Supprimer</a>
+</td>
+
+    </tr>";
+}
+
+echo "</tbody></table>";
+?>
 </body>
 </html>
