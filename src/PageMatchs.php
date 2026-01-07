@@ -60,19 +60,20 @@ while ($row = $req->fetch(PDO::FETCH_ASSOC)) {
     <td>".$domicile."</td>
     <td>".$victoire."</td>
     <td>".$row['RESULTAT']."</td>
-    <td><a href='modifMatch.php?IDMATCH=".$row['IDMATCH']".&
-DATE=".$row['DATE']".&
-HEURE=".$row['HEURE']".&
+    <td><a href='modifMatch.php?IDMATCH=".$row['IDMATCH']."&
+DATE=".$row['DATE']."&
+HEURE=".$row['HEURE']."&
 EQUIPEADV=".$row['EQUIPEADV']."&
 LIEU=".$row['LIEU']."&
 DOMICILE=".$row['DOMICILE']."&
 VICTOIRE=".$row['VICTOIRE']."&
 RESULTAT=".$row['RESULTAT']."&
 trt=R'>Modifier</a></td>
+<td>
     <a href='supprMatch.php?
-IDMATCH=".$row['IDMATCH']".&
-DATE=".$row['DATE']".&
-HEURE=".$row['HEURE']".&
+IDMATCH=".$row['IDMATCH']."&
+DATE=".$row['DATE']."&
+HEURE=".$row['HEURE']."&
 EQUIPEADV=".$row['EQUIPEADV']."&
 LIEU=".$row['LIEU']."&
 DOMICILE=".$row['DOMICILE']."&
