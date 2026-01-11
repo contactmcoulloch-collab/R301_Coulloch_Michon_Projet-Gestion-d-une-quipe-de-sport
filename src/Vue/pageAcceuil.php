@@ -42,7 +42,7 @@
 </head>
 <body>
     <div class="container">
-        <a href="pageJoueurs.html" class="rectangle">Mes Joueurs</a>
+        <a href="index.php?controleur=joueur" class="rectangle">Mes Joueurs</a>
         <a href="pageMatchs.html" class="rectangle">Matchs a venir</a>
         <a href="pageStats.html" class="rectangle">Statistiques</a>
     </div>

@@ -92,9 +92,7 @@ function matchs_modifier(PDO $linkpdo, $idmatch, $date, $heure, $equipeadv, $lie
         'resultat' => $resultat,
         'id' => $idmatch
     );
-    applog("modif match   var: " . implode(" / ", $var));
-    applog($stmt);
-
+   
     try {
         $req->execute($var);
     }
@@ -106,7 +104,6 @@ function matchs_modifier(PDO $linkpdo, $idmatch, $date, $heure, $equipeadv, $lie
 
 function matchs_supprimer(PDO $linkpdo, $id): ?array
 {
-    applog("DELETE LE_MATCH " . $id);
     $req = $linkpdo->prepare(
         'DELETE FROM LE_MATCH WHERE IDMATCH = :id;'
 

@@ -1,38 +1,37 @@
 <?php
-/// Connexion MySQL
+
 require __DIR__ . '/../DAO/connexion_DAO.php';
 require __DIR__ . '/../DAO/joueur_DAO.php';
 
-/// AFFICHAGE DU FORMULAIRE avec données en base
+/// AFFICHAGE DU FORMULAIRE
 if ($_SERVER['REQUEST_METHOD'] === 'GET') {
 
-$idjoueur=$_GET['idjoueur'];
+    $idJoueur = '';
+    $nom = '';
+    $prenom = '';
+    $licence = '';
+    $naissance = '';
+    $taille = '';
+    $poids = '';
+    $statut = '';
 
-    $row = lireJoueur($pdo, $idjoueur);
-    $idjoueur = $row['IDJOUEUR'];
-    $nom = $row['NOM'];
-    $prenom = $row['PRENOM'];
-    $licence = $row['NUMERODELICENCE'];
-    $naissance=$row['DATEDENAISSANCE'];
-    $taille=$row['TAILLE'];
-    $poids=$row['POIDS'];
-    $statut=$row['STATUT'];
 ?>
 <!DOCTYPE html>
 <html lang="fr">
 <head>
 <meta charset="UTF-8">
-<title>Modification joueur</title>
+<title>Création joueur</title>
 </head>
 <body>
 
-<h2>Modifier le joueur</h2>
+<h2>Creer le joueur</h2>
 
-<form action="index.php?controleur=joueur&action=modifier"
+<div class="panel">
+<form action="index.php?controleur=joueur&action=creer"
  method="post">
 
-idjoueur:
-<input type="text" name="idjoueur" value="<?php echo $idjoueur; ?>"><br>
+IdJoueur:
+<input type="text" name="idJoueur" value="<?php echo $idJoueur; ?>"><br>
 
 Nom :
 <input type="text" name="Nom" value="<?php echo $nom; ?>"><br>
@@ -44,7 +43,7 @@ N° Licence :
 <input type="text" name="Licence" value="<?php echo $licence; ?>"><br>
 
 Date de Naissance :
-<input type="date" name="DateNaissance" value="<?php echo $naissance; ?>"><br>
+<input type="date" name="DateNaissance" value="<?php echo $dateNaissance; ?>"><br>
 
 Taille : 
 <input type="number" name="Taille" value="<?php echo $taille; ?>"><br>
@@ -62,9 +61,9 @@ Statut :
 
 
 
-<input type="submit" value="Modifier">
+<input type="submit" value="Creer">
 </form>
-
+</div>
 </body>
 </html>
 
@@ -73,7 +72,7 @@ Statut :
 
 else {
 
-    $idjoueur = $_POST['idjoueur'];
+    $idjoueur = $_POST['idJoueur'];
     $nom = $_POST['Nom'];
     $prenom = $_POST['Prenom'];
     $licence = $_POST['Licence'];
@@ -82,8 +81,8 @@ else {
     $poids = $_POST['Poids'];
     $statut = $_POST['Statut'];
 
-    modifierJoueur($pdo, $idjoueur, $nom, $prenom, $licence, $naissance, $taille, $poids, $statut);
 
-    header('Location: index.php?controleur=joueur&action=liste');
+    creerJoueur($pdo, $idjoueur, $nom, $prenom, $licence, $naissance, $taille, $poids, $statut);
+    header('Location: index.php?controleur=joueur&action=');
 }
 ?>

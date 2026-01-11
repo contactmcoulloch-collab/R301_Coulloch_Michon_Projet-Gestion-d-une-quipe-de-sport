@@ -30,6 +30,9 @@ table, th, td {
 <body>
 <h2>Liste des joueurs</h2>
 
+<a href= "index.php?controleur=joueur&action=creer">Creer Joueur</a>
+<br>
+<br>
 <?php
 echo "<table>
 <thead>
@@ -51,20 +54,10 @@ while ($row = $req->fetch(PDO::FETCH_ASSOC)) {
     <td>".$row['PRENOM']."</td>
     <td>".$row['NUMERODELICENCE']."</td>
     <td>
-      <a href='modifJoueur.php?
-      idjoueur=".$row['IDJOUEUR']."&
-      nom=".$row['NOM']."&
-      prenom=".$row['PRENOM']."&
-      licence=".$row['NUMERODELICENCE']."&
-      trt=R'>Modifier</a>
+      <a href='./index.php?controleur=joueur&action=modifier&idjoueur=".$row['IDJOUEUR']."'>Modifier</a>
     </td>
     <td>
-<a href='supprJoueur.php?
-idjoueur=".$row['IDJOUEUR']."&
-nom=".$row['NOM']."&
-prenom=".$row['PRENOM']."&
-licence=".$row['NUMERODELICENCE']."&
-trt=R'>Supprimer</a>
+<a href='index.php?controleur=joueur&action=supprimer&idjoueur=".$row['IDJOUEUR']."'>Supprimer</a>
 </td>
 
     </tr>";

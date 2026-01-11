@@ -12,9 +12,7 @@ catch (Exception $e) {
     die('Erreur : ' . $e->getMessage());
 }
 
-/// ==============================
-/// AFFICHAGE DU FORMULAIRE
-/// ==============================
+
 if (array_key_exists('trt', $_GET)) {
 
     $idmatch   = $_GET['IDMATCH'];
