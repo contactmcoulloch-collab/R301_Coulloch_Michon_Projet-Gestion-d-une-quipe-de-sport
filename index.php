@@ -18,14 +18,25 @@ switch ($controleur) {
         else if ( $action == 'supprimer'){
             require __DIR__ . '/src/Vue/supprJoueur.php';
             }
-         else{
+        else{
             require __DIR__ . '/src/Vue/PageJoueurs.php';
-            }
-            break;
+        }
+        break;
 
-    // case 'match':
-    //     require __DIR__ . '/src/controleurs/match_controleur.php';
-    //     break;
+    case 'match':
+        if ( $action == 'creer'){
+            require __DIR__ . '/src/Vue/creerMatch.php';
+            } 
+        else if ( $action == 'modifier'){
+            require __DIR__ . '/src/Vue/modifMatch.php';
+            }
+        else if ( $action == 'supprimer'){
+            require __DIR__ . '/src/Vue/supprMatch.php';
+            }
+        else{
+            require __DIR__ . '/src/Vue/PageMatchs.php';
+        }
+        break;
 
     // case 'stats':
     //     require __DIR__ . '/src/controleurs/stats_controleur.php';
