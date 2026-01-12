@@ -84,7 +84,7 @@ VICTOIRE=".$row['VICTOIRE']."&
 RESULTAT=".$row['RESULTAT']."&
 trt=R'>Supprimer</a></td>
 <td>
-    <a href='index.php?controleur=match&action=feuille'>Voir la fiche de match</a></td>
+    <a href='index.php?controleur=match&action=feuille&idmatch=".$row['IDMATCH']."'>Voir la fiche de match</a></td>
 </tr>";
 }
 echo "</tbody></table>";

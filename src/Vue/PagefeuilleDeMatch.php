@@ -25,6 +25,25 @@ table, th, td {
 </head>
 
 <body>
-    
+    <?php
+        require __DIR__ . '/../DAO/connexion_DAO.php';
+        require __DIR__ . '/../DAO/match_DAO.php';
+
+        $idmatch = $_GET['idmatch'];
+        $row = matchs_trouver($pdo, $idmatch);
+
+        $date      = $row['DATE'];
+        $heure     = $row['HEURE'];
+        $equipe    = $row['EQUIPEADV'];
+        $lieu      = $row['LIEU'];
+        $domicile  = $row['DOMICILE'];
+        $victoire  = $row['VICTOIRE'];
+        $resultat  = $row['RESULTAT'];
+
+        echo"$date $heure $equipe $lieu $domicile $victoire $resultat";
+
+        
+
+    ?>
 </body>
 </html>
