@@ -43,7 +43,7 @@
 <body>
     <div class="container">
         <a href="index.php?controleur=joueur" class="rectangle">Mes Joueurs</a>
-        <a href="index.php?controleur=match" class="rectangle">Matchs a venir</a>
+        <a href="index.php?controleur=match" class="rectangle">Matchs</a>
         <a href="pageStats.html" class="rectangle">Statistiques</a>
     </div>
 </body>

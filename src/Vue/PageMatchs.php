@@ -29,6 +29,9 @@ table, th, td { border:1px solid black; }
 <body>
 <h2>Liste des Matchs</h2>
 
+<a href= "index.php?controleur=match&action=creer">Planifier un match</a>
+<br>
+<br>
 <?php
 echo "<table>
 <thead>
@@ -79,7 +82,9 @@ LIEU=".$row['LIEU']."&
 DOMICILE=".$row['DOMICILE']."&
 VICTOIRE=".$row['VICTOIRE']."&
 RESULTAT=".$row['RESULTAT']."&
-trt=R'>Supprimer</a>
+trt=R'>Supprimer</a></td>
+<td>
+    <a href='index.php?controleur=match&action=feuille'>Voir la fiche de match</a></td>
 </tr>";
 }
 echo "</tbody></table>";

@@ -9,9 +9,22 @@ $mdp='$iutinfo';
 
 try {
     $linkpdo = new PDO("mysql:host=$server;dbname=$db", $login, $mdp);
-}
-catch (Exception $e) {
+} catch (Exception $e) {
     die('Erreur : ' . $e->getMessage());
 }
 
 ?>
+<head>
+<meta charset="UTF-8">
+<title>Feuille de match</title>
+<style>
+table, th, td {
+  border:1px solid black;
+}
+</style>
+</head>
+
+<body>
+    
+</body>
+</html>

@@ -33,6 +33,9 @@ switch ($controleur) {
         else if ( $action == 'supprimer'){
             require __DIR__ . '/src/Vue/supprMatch.php';
             }
+        else if ( $action == 'feuille'){
+            require __DIR__ . '/src/Vue/PageFeuilleDeMatch.php';
+            }
         else{
             require __DIR__ . '/src/Vue/PageMatchs.php';
         }
