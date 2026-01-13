@@ -55,7 +55,7 @@ table, th, td {
 
         echo "<h4> Joueurs libres : </h4> <br>";
         foreach ($tab2 as $joueurLibre) {
-            echo "Nom: " . $joueurLibre['NOM'] . " - Prénom: " . $joueurLibre['PRENOM'] . "<a href='index.php?controleur=feuille&action=creer&idmatch=".$idmatch."'> ajouter au match </a>" . "<br>";
+            echo "Nom: " . $joueurLibre['NOM'] . " - Prénom: " . $joueurLibre['PRENOM'] . "<a href='index.php?controleur=feuille&action=creer&idmatch=".$idmatch."&idjoueur=".$joueurLibre['IDJOUEUR']."'> ajouter au match </a>" . "<br>";
         }
     ?>
 </body>

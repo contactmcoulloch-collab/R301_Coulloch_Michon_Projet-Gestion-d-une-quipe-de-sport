@@ -2,15 +2,18 @@
 
 require __DIR__ . '/../DAO/connexion_DAO.php';
 require __DIR__ . '/../DAO/joueur_DAO.php';
+require __DIR__ . '/../DAO/participer_DAO.php';
+
+$idmatch = $_GET['idmatch'];
+$idjoueur = $_GET['idjoueur'];
 
 /// AFFICHAGE DU FORMULAIRE
 if ($_SERVER['REQUEST_METHOD'] === 'GET') {
 
-    $idJoueur = '';
+    $idparticiper = '';  // Initialize idparticiper
     $poste = '';
     $titulaire = '';
     $note = '';
-    $idMatch = '';
 
 ?>
 <!DOCTYPE html>
@@ -24,25 +27,25 @@ if ($_SERVER['REQUEST_METHOD'] === 'GET') {
 <h2>Créer le joueur</h2>
 
 <div class="panel">
-<form action="index.php?controleur=joueur&action=creer" method="post">
+<form action="index.php?controleur=feuille&action=creer" method="post">
 
-Id Joueur:
-<input type="text" name="idJoueur" value="<?php echo $idJoueur; ?>"><br>
+Id Participer:
+<input type="text" name="idParticiper" value="<?php echo $idparticiper; ?>" required><br>
 
 Poste :
-<input type="text" name="Poste" value="<?php echo $poste; ?>"><br>
+<input type="text" name="Poste" value="<?php echo $poste; ?>" required><br>
 
 Titulaire :
-<select name="Titulaire">
+<select name="Titulaire" required>
     <option value="1">Oui</option>
     <option value="0">Non</option>
 </select><br>
 
 Note :
-<input type="number" name="Note" value="<?php echo $note; ?>" step="0.1" min="0" max="10"><br>
+<input type="number" name="Note" value="<?php echo $note; ?>" step="0.1" min="0" max="10" required><br>
 
-Id Match:
-<input type="text" name="IdMatch" value="<?php echo $idMatch; ?>"><br>
+<input type="hidden" name="IdMatch" value="<?php echo $idmatch; ?>">
+<input type="hidden" name="IdJoueur" value="<?php echo $idjoueur; ?>">
 
 <input type="submit" value="Créer">
 </form>
@@ -52,15 +55,17 @@ Id Match:
 
 <?php
 } else {
+    $idjoueur = $_POST['IdJoueur'];
+    $idmatch = $_POST['IdMatch'];
+
     $idparticiper = $_POST['idParticiper'];
-    $idjoueur = $_POST['idJoueur'];
     $poste = $_POST['Poste'];
     $titulaire = $_POST['Titulaire'];
     $note = $_POST['Note'];
-    $idMatch = $_POST['IdMatch'];
+    
+    // Use the values directly from the POST data
+    creer_participer($pdo, $idparticiper, $poste, $titulaire, $note, $idjoueur, $idmatch);
 
-    creer_participer($pdo, $idparticiper, $idjoueur, $poste, $titulaire, $note, $idMatch);
-
-    header('Location: index.php?controleur=match&action=feuille&idmatch=$row['IDMATCH']');
+    header('Location: index.php?controleur=match&action=feuille&idmatch='. $idmatch);
 }
 ?>
