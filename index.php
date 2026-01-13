@@ -40,6 +40,11 @@ switch ($controleur) {
             require __DIR__ . '/src/Vue/PageMatchs.php';
         }
         break;
+    case 'feuille':
+        if ( $action == 'creer'){
+            require  __DIR__ . '/src/Vue/creerParticiper.php';
+        }
+        break;
 
     // case 'stats':
     //     require __DIR__ . '/src/controleurs/stats_controleur.php';

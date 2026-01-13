@@ -28,22 +28,35 @@ table, th, td {
     <?php
         require __DIR__ . '/../DAO/connexion_DAO.php';
         require __DIR__ . '/../DAO/match_DAO.php';
+        require __DIR__ . '/../DAO/participer_DAO.php';
+        require __DIR__ . '/../DAO/joueur_DAO.php';
 
         $idmatch = $_GET['idmatch'];
-        $row = matchs_trouver($pdo, $idmatch);
+        $currentMatch = matchs_trouver($pdo, $idmatch);
 
-        $date      = $row['DATE'];
-        $heure     = $row['HEURE'];
-        $equipe    = $row['EQUIPEADV'];
-        $lieu      = $row['LIEU'];
-        $domicile  = $row['DOMICILE'];
-        $victoire  = $row['VICTOIRE'];
-        $resultat  = $row['RESULTAT'];
+        $date      = $currentMatch['DATE'];
+        $heure     = $currentMatch['HEURE'];
+        $equipe    = $currentMatch['EQUIPEADV'];
+        $lieu      = $currentMatch['LIEU'];
+        $domicile  = $currentMatch['DOMICILE'];
+        $victoire  = $currentMatch['VICTOIRE'];
+        $resultat  = $currentMatch['RESULTAT'];
 
         echo"$date $heure $equipe $lieu $domicile $victoire $resultat";
 
+        $tab = allParticipants($pdo, $idmatch);
         
+        echo "<h4> Joueurs a ce match : </h4> <br>";
+        foreach ($tab as $joueurOccupe) {
+            echo "Nom: " . $joueurOccupe['NOM'] . " - Prénom: " . $joueurOccupe['PRENOM'] . "<a> retirer du match </a>" . "<br>";
+        }
 
+        $tab2 = listerJoueurs($pdo);
+
+        echo "<h4> Joueurs libres : </h4> <br>";
+        foreach ($tab2 as $joueurLibre) {
+            echo "Nom: " . $joueurLibre['NOM'] . " - Prénom: " . $joueurLibre['PRENOM'] . "<a href='index.php?controleur=feuille&action=creer&idmatch=".$idmatch."'> ajouter au match </a>" . "<br>";
+        }
     ?>
 </body>
 </html>
