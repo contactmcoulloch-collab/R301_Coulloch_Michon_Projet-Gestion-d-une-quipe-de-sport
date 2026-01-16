@@ -63,26 +63,11 @@ while ($row = $req->fetch(PDO::FETCH_ASSOC)) {
     <td>".$domicile."</td>
     <td>".$victoire."</td>
     <td>".$row['RESULTAT']."</td>
-    <td><a href='modifMatch.php?IDMATCH=".$row['IDMATCH']."&
-DATE=".$row['DATE']."&
-HEURE=".$row['HEURE']."&
-EQUIPEADV=".$row['EQUIPEADV']."&
-LIEU=".$row['LIEU']."&
-DOMICILE=".$row['DOMICILE']."&
-VICTOIRE=".$row['VICTOIRE']."&
-RESULTAT=".$row['RESULTAT']."&
-trt=R'>Modifier</a></td>
+    <td>
+ <a href='./index.php?controleur=match&action=modifier&idmatch=".$row['IDMATCH']."'>Modifier</a></td>
 <td>
-    <a href='supprMatch.php?
-IDMATCH=".$row['IDMATCH']."&
-DATE=".$row['DATE']."&
-HEURE=".$row['HEURE']."&
-EQUIPEADV=".$row['EQUIPEADV']."&
-LIEU=".$row['LIEU']."&
-DOMICILE=".$row['DOMICILE']."&
-VICTOIRE=".$row['VICTOIRE']."&
-RESULTAT=".$row['RESULTAT']."&
-trt=R'>Supprimer</a></td>
+<a href='index.php?controleur=match&action=supprimer&idmatch=".$row['IDMATCH']."'>Supprimer</a>
+</td>
 <td>
     <a href='index.php?controleur=match&action=feuille&idmatch=".$row['IDMATCH']."'>Voir la fiche de match</a></td>
 </tr>";
