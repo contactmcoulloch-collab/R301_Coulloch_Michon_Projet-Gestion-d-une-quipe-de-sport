@@ -1,28 +1,22 @@
 <?php
 /// Connexion MySQL
-$server='mysql-projetphp-michon-coulloch.alwaysdata.net:3306';
-$db='projetphp-michon-coulloch_bd';
-$login='442040_user';
-$mdp='$iutinfo';
+require __DIR__ . '/../DAO/connexion_DAO.php';
+require __DIR__ . '/../DAO/match_DAO.php';
 
-try {
-    $linkpdo = new PDO("mysql:host=$server;dbname=$db", $login, $mdp);
-}
-catch (Exception $e) {
-    die('Erreur : ' . $e->getMessage());
-}
+/// AFFICHAGE DU FORMULAIRE avec données en base
+if ($_SERVER['REQUEST_METHOD'] === 'GET') {
 
+$idjoueur=$_GET['idmatch'];
 
-if (array_key_exists('trt', $_GET)) {
-
-    $idmatch   = $_GET['IDMATCH'];
-    $date      = $_GET['DATE'];
-    $heure     = $_GET['HEURE'];
-    $equipe    = $_GET['EQUIPEADV'];
-    $lieu      = $_GET['LIEU'];
-    $domicile  = $_GET['DOMICILE'];
-    $victoire  = $_GET['VICTOIRE'];
-    $resultat  = $_GET['RESULTAT'];
+    $row = matchs_trouver($pdo, $idjoueur);
+    $idmatch = $row['IDMATCH'];
+    $date = $row['DATE'];
+    $heure = $row['HEURE'];
+    $equipe = $row['EQUIPEADV'];
+    $lieu =$row['LIEU'];
+    $domicile=$row['DOMICILE'];
+    $victoire=$row['VICTOIRE'];
+    $resultat=$row['RESULTAT'];
 ?>
 <!DOCTYPE html>
 <html lang="fr">
@@ -34,15 +28,7 @@ if (array_key_exists('trt', $_GET)) {
 
 <h2>Modifier le match</h2>
 
-<form action="modifMatch.php?
-IDMATCH=<?php echo $idmatch; ?>&
-DATE=<?php echo $date; ?>&
-HEURE=<?php echo $heure; ?>&
-EQUIPEADV=<?php echo $equipe; ?>&
-LIEU=<?php echo $lieu; ?>&
-DOMICILE=<?php echo $domicile; ?>&
-VICTOIRE=<?php echo $victoire; ?>&
-RESULTAT=<?php echo $resultat; ?>"
+<form action="index.php?controleur=match&action=modifier"
 method="post">
 
 ID Match :<input type="text" name="IDMATCH" value="<?php echo $idmatch; ?>"><br>
@@ -63,39 +49,19 @@ Résultat :<input type="text" name="RESULTAT" value="<?php echo $resultat; ?>"><
 }
 else {
 
-    $idmatch = $_GET['IDMATCH'];
+    $idmatch = $_POST['IDMATCH'];
 
-    $newdate     = $_POST['DATE'];
-    $newheure    = $_POST['HEURE'];
-    $newequipe   = $_POST['EQUIPEADV'];
-    $newlieu     = $_POST['LIEU'];
-    $newdom      = $_POST['DOMICILE'];
-    $newvictoire = $_POST['VICTOIRE'];
-    $newresultat = $_POST['RESULTAT'];
+    $date     = $_POST['DATE'];
+    $heure    = $_POST['HEURE'];
+    $equipeadv   = $_POST['EQUIPEADV'];
+    $lieu     = $_POST['LIEU'];
+    $domicile      = $_POST['DOMICILE'];
+    $victoire = $_POST['VICTOIRE'];
+    $resultat = $_POST['RESULTAT'];
 
-    $req = $linkpdo->prepare(
-        "UPDATE LE_MATCH SET
-        DATE = :date,
-        HEURE = :heure,
-        EQUIPEADV = :equipe,
-        LIEU = :lieu,
-        DOMICILE = :domicile,
-        VICTOIRE = :victoire,
-        RESULTAT = :resultat
-        WHERE IDMATCH = :id"
-    );
+     matchs_modifier($pdo, $idmatch, $date, $heure, $equipeadv, $lieu, $domicile, $victoire, $resultat);
 
-    $req->execute(array(
-        'date' => $newdate,
-        'heure' => $newheure,
-        'equipe' => $newequipe,
-        'lieu' => $newlieu,
-        'domicile' => $newdom,
-        'victoire' => $newvictoire,
-        'resultat' => $newresultat,
-        'id' => $idmatch
-    ));
 
-    header('Location: PageMatchs.php');
+   header('Location: index.php?controleur=match&action=liste');
 }
 ?>
