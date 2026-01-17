@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Acceuil</title>
+    <title>accueil</title>
     <style>
         body {
             display: flex;
@@ -41,10 +41,51 @@
     </style>
 </head>
 <body>
-    <div class="container">
+    <?php 
+ //   echo "Entree dans la vue N°".$isconnecte;
+    if ($isconnecte == 0){
+echo '<div class = "container" id = "divLogin">
+    <form action="index.php?controleur=accueil&action=connecter"
+method="post">
+
+Login :<input type="text" name="LOGIN"><br>
+Mot de passe :<input type="password" name="MDP"><br>
+<input type="submit" value="Se connecter">
+</form>
+
+</div>';
+
+    }else if ($isconnecte==1){
+    $login = $_POST["LOGIN"];
+    $mdp = $_POST["MDP"];
+    if ($login=="moi" && $mdp=="a"){
+        echo '<div class="container" id = "divMenu">
         <a href="index.php?controleur=joueur" class="rectangle">Mes Joueurs</a>
         <a href="index.php?controleur=match" class="rectangle">Matchs</a>
         <a href="pageStats.html" class="rectangle">Statistiques</a>
-    </div>
+    </div>';
+    } else {
+        echo '<div class = "error"> login ou mot de passe incorrect></div>';
+        echo '<div class = "container" id = "divLogin">
+    <form action="index.php?controleur=accueil&action=connecter"
+method="post">
+
+Login :<input type="text" name="LOGIN" value="'.$login.'"><br>
+Mot de passe :<input type="password" name="MDP" value="'.$mdp.'"><br>
+<input type="submit" value="Se connecter">
+</form>
+
+</div>';
+    }
+
+} else {
+echo '<div class="container" id = "divMenu">
+        <a href="index.php?controleur=joueur" class="rectangle">Mes Joueurs</a>
+        <a href="index.php?controleur=match" class="rectangle">Matchs</a>
+        <a href="pageStats.html" class="rectangle">Statistiques</a>
+    </div>';
+
+    header('Location: index.php?controleur=accueil&action=menu');
+}?>
 </body>
 </html>

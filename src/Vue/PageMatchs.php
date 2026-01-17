@@ -1,21 +1,13 @@
 <!DOCTYPE html>
 <html lang="fr">
+<!DOCTYPE html>
+<html lang="fr">
 <?php
-/// Connexion MySQL
-$server='mysql-projetphp-michon-coulloch.alwaysdata.net:3306';
-$db='projetphp-michon-coulloch_bd';
-$login='442040_user';
-$mdp='$iutinfo';
 
-try {
-    $linkpdo = new PDO("mysql:host=$server;dbname=$db", $login, $mdp);
-} catch (Exception $e) {
-    die('Erreur : ' . $e->getMessage());
-}
+require __DIR__ . '/../DAO/connexion_DAO.php';
+require __DIR__ . '/../DAO/match_DAO.php';
 
-$lreq = "SELECT * FROM LE_MATCH";
-$req = $linkpdo->prepare($lreq);
-$req->execute();
+$matchs = matchs_lister($pdo);
 ?>
 
 <head>
@@ -49,7 +41,7 @@ echo "<table>
 </tr>
 </thead><tbody>";
 
-while ($row = $req->fetch(PDO::FETCH_ASSOC)) {
+foreach ($matchs as $row){
 
     $domicile = ($row['DOMICILE'] == 1) ? "Oui" : "Non";
     $victoire = ($row['VICTOIRE'] == 1) ? "Gagné" : "Perdu";

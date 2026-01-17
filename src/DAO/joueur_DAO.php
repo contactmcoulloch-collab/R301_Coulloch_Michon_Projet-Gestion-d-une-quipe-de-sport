@@ -6,6 +6,14 @@ function listerJoueurs(PDO $linkpdo)
     $req->execute();
     return $req->fetchAll(PDO::FETCH_ASSOC);
 }
+function listerCommentaires(PDO $linkpdo, $idjoueur)
+{
+    $lreq = "SELECT * FROM COMMENTAIRE WHERE IDJOUEUR = :idjoueur";
+    $req = $linkpdo->prepare($lreq);
+    $req->execute(['idjoueur' => $idjoueur]);
+    $commentaires = $req->fetchAll(PDO::FETCH_ASSOC);
+    return $commentaires;
+}
 
 function lireJoueur(PDO $linkpdo, $id)
 {
@@ -50,6 +58,39 @@ function creerJoueur(PDO $linkpdo, $id, $nom, $prenom, $licence, $datenais, $tai
         'taille' => $taille,
         'poids' => $poids,
         'statut' => $statut,
+    );
+
+        $req->execute($var);
+
+}
+
+function creerCommentaire(PDO $linkpdo, $idjoueur, $titre, $texte)
+{
+    $lreq = "SELECT max(IDCOMM) as oldid FROM COMMENTAIRE";
+    $req = $linkpdo->prepare($lreq);
+    $req->execute();
+    $resid = $req->fetch(PDO::FETCH_ASSOC);
+
+    $req = $linkpdo->prepare(
+        "INSERT INTO COMMENTAIRE
+        ( IDCOMM,
+            TITRE,
+            TEXTE,
+            IDJOUEUR
+        ) 
+             VALUES (
+            :id,
+             :titre,
+             :texte,
+             :idjoueur
+             )
+             "
+    );
+    $var = array(
+        'id' => $resid['oldid']+1,
+        'titre' => $titre,
+        'texte' => $texte,
+        'idjoueur' => $idjoueur,
     );
 
         $req->execute($var);

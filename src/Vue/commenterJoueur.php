@@ -1,0 +1,82 @@
+<?php
+
+require __DIR__ . '/../DAO/connexion_DAO.php';
+require __DIR__ . '/../DAO/joueur_DAO.php';
+
+/// AFFICHAGE DU FORMULAIRE
+if ($_SERVER['REQUEST_METHOD'] === 'GET') {
+
+    $idJoueur = $_GET['idjoueur'];
+    $joueur = lireJoueur($pdo, $idJoueur);
+    $commentaires = listerCommentaires($pdo, $idJoueur);
+    var_dump($commentaires);
+
+?>
+<!DOCTYPE html>
+<html lang="fr">
+    <head>
+        <meta charset="UTF-8">
+        <title>Ajouter commentaire</title>
+    </head>
+    <body>
+        
+        <h2>Ajouter un commentaire pour </h2>
+         <?php echo $joueur['NOM'] . ' ' . $joueur['PRENOM'] ?>
+</h2> 
+            
+            <div class="panel">
+            <form action="index.php?controleur=joueur&action=commenter"
+             method="post">
+            
+            Titre  commentaire :
+            <input type="text" name="TITRE" value=""><br>
+            
+            Détail commentaire :
+            <input type="text" name="DETAIL" value=""><br>
+            <input type="text" name="IDJOUEUR" value="<?php echo $joueur['IDJOUEUR'] ?>"><br>
+            <input type="submit" value="Creer">
+            </form>
+</div>
+
+<div class="panel">
+<table>
+    <thead>
+        <th>Titre</th><th>Détail</th>
+</thead>
+    <tbody>
+        <?php 
+
+foreach ($commentaires as $com) {
+    echo '<tr><td> ';
+    echo $com['TITRE'] ;
+    echo '</td><td>' ;
+    echo $com['TEXTE'] ;
+    echo '</td></tr>';
+    } 
+        ?>
+</tbody>
+</table>
+
+</div>
+<br>
+
+
+
+</div>
+</body>
+</html>
+
+<?php
+}
+
+else {
+
+    $idjoueur = $_POST['IDJOUEUR'];
+    $detail = $_POST['TITRE'];
+    $titre = $_POST['DETAIL'];
+
+
+    creerCommentaire($pdo, $idjoueur, $titre, $detail);
+    header('Location: index.php?controleur=joueur&action=liste');
+}
+?>

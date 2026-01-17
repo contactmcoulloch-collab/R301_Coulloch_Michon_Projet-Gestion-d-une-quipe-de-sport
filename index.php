@@ -3,7 +3,7 @@ declare(strict_types=1);
 
 
 // Point d'entrée unique avec page par defaut = accueil
-$controleur = $_GET['controleur'] ?? 'accueil';
+$controleur = $_GET['controleur'] ?? '';
 $action = $_GET['action'] ?? '';
 
 // Routage sur page demandée
@@ -18,6 +18,9 @@ switch ($controleur) {
         else if ( $action == 'supprimer'){
             require __DIR__ . '/src/Vue/supprJoueur.php';
             }
+        else if ($action == 'commenter'){
+            require __DIR__.'/src/Vue/commenterJoueur.php';
+        }
         else{
             require __DIR__ . '/src/Vue/PageJoueurs.php';
         }
@@ -51,8 +54,21 @@ switch ($controleur) {
     //     break;
 
     case 'accueil':
+        if($action='connecter'){
+            $isconnecte = 1; 
+            require __DIR__ . '/src/Vue/pageAcceuil.php';
+            break;
+        } if ($action='menu') {
+            $isconnecte = 2; 
+            require __DIR__ . '/src/Vue/pageAcceuil.php';
+            break;
+        }
+
     default:
+        $isconnecte = 0; 
         require __DIR__ . '/src/Vue/pageAcceuil.php';
         break;
 }
+
+
 ?>
