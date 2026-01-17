@@ -38,6 +38,7 @@ echo "<table>
 <th>Résultat</th>
 <th>Modifier</th>
 <th>Supprimer</th>
+<th>Feuille</th>
 </tr>
 </thead><tbody>";
 
@@ -61,7 +62,7 @@ foreach ($matchs as $row){
 <a href='index.php?controleur=match&action=supprimer&idmatch=".$row['IDMATCH']."'>Supprimer</a>
 </td>
 <td>
-    <a href='index.php?controleur=match&action=feuille&idmatch=".$row['IDMATCH']."'>Voir la fiche de match</a></td>
+    <a href='index.php?controleur=feuille&action=liste&idmatch=".$row['IDMATCH']."'>Voir la feuille de match</a></td>
 </tr>";
 }
 echo "</tbody></table>";

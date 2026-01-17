@@ -138,3 +138,16 @@ function supprimerJoueur(PDO $linkpdo, $id)
         $req->execute($var);
  }
 
+ function listerJoueursDispos(PDO $linkpdo)
+ {
+     $req = $linkpdo->prepare(
+         'SELECT j.IDJOUEUR,j.NOM,j.PRENOM, j.POIDS, p.POSTE, p.TITULAIRE FROM JOUEUR j LEFT JOIN PARTICIPER p ON j.IDJOUEUR = p.IDJOUEUR WHERE p.IDJOUEUR IS NULL AND j.IDJOUEUR IS NOT NULL AND j.STATUT NOT IN ("Absent","Malade");'
+         
+    );
+
+        $req->execute();
+        $joueurs = $req->fetchAll(PDO::FETCH_ASSOC);
+        return $joueurs;
+ 
+ }
+

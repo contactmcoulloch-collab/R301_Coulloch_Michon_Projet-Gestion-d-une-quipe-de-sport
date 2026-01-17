@@ -2,9 +2,10 @@
 
 function allParticipants(PDO $linkpdo, $idmatch): array
 {
-    $lreq = "SELECT * FROM PARTICIPER where IDMATCH = :id";
+    $lreq = "SELECT * FROM JOUEUR where IDJOUEUR IN (SELECT IDJOUEUR FROM PARTICIPER WHERE IDMATCH= :idmatch);";
+ //   $lreq = "SELECT JOUEUR.*, POSTE, TITULAIRE, IDMATCH FROM JOUEUR, PARTICIPER where PARTICIPER.IDMATCH = :idmatch AND PARTICIPER.IDJOUEUR = JOUEUR.IDJOUEUR;";
     $req = $linkpdo->prepare($lreq);
-    $req->execute(['id'  => $idmatch]);
+    $req->execute(['idmatch'  => $idmatch]);
     return $req->fetchAll(PDO::FETCH_ASSOC);
 }
 
@@ -85,6 +86,48 @@ function supprimer_participer(PDO $linkpdo, $id): ?array
     );
     $var = array(
         'id' => $id
+    );
+
+    try {
+        $req->execute($var);
+    }
+    catch (Exception $e) {
+        return ['Erreur : ' . $e->getMessage()];
+    }
+    return [];
+}
+
+function retirer_joueurs(PDO $linkpdo, $idjoueur,$idmatch): ?array
+{
+    $req = $linkpdo->prepare(
+        'DELETE FROM PARTICIPER WHERE IDJOUEUR = :idjoueur and IDMATCH = :idmatch;'
+    );
+    $var = array(
+        'idjoueur' => $idjoueur,
+        'idmatch' => $idmatch
+    );
+
+    try {
+        $req->execute($var);
+    }
+    catch (Exception $e) {
+        return ['Erreur : ' . $e->getMessage()];
+    }
+    return [];
+}
+
+function ajouter_joueurs(PDO $linkpdo, $poste,$titulaire,$note,$idjoueur,$idmatch): ?array
+{
+    $req = $linkpdo->prepare(
+        'INSERT INTO PARTICIPER (POSTE,TITULAIRE,NOTE,IDJOUEUR,IDMATCH)
+        VALUES(:poste,:titulaire,:note,:idjoueur,:idmatch);'
+    );
+    $var = array(
+        'poste' => $poste,
+        'titulaire' => $titulaire,
+        'note' => $note,
+        'idjoueur' => $idjoueur,
+        'idmatch' => $idmatch
     );
 
     try {

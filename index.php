@@ -44,8 +44,14 @@ switch ($controleur) {
         }
         break;
     case 'feuille':
-        if ( $action == 'creer'){
-            require  __DIR__ . '/src/Vue/creerParticiper.php';
+        if ( $action == 'liste'){
+            require  __DIR__ . '/src/Vue/PageFeuilleDeMatch.php';
+        }  else         if ( $action == 'ajouter'){
+            require  __DIR__ . '/src/Vue/PageFeuilleDeMatch.php';
+        }  else if ( $action == 'preparer'){
+            require  __DIR__ . '/src/Vue/PageFeuilleDeMatch.php';
+        }  else if ( $action == 'retirer'){
+            require  __DIR__ . '/src/Vue/PageFeuilleDeMatch.php';
         }
         break;
 
