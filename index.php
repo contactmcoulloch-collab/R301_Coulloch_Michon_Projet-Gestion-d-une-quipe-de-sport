@@ -5,7 +5,7 @@ declare(strict_types=1);
 // Point d'entrée unique avec page par defaut = accueil
 $controleur = $_GET['controleur'] ?? '';
 $action = $_GET['action'] ?? '';
-var_dump($_GET);
+// var_dump($_GET);
 
 // Routage sur page demandée
 switch ($controleur) {
@@ -56,7 +56,7 @@ switch ($controleur) {
         if ($action == 'connecter') {
             $isconnecte = 1;
             require __DIR__ . '/src/Vue/pageAcceuil.php';
-        } else if ($action == 'menu') {
+        } else if ($action == 'menuGen') {
             $isconnecte = 2;
             require __DIR__ . '/src/Vue/pageAcceuil.php';
         }

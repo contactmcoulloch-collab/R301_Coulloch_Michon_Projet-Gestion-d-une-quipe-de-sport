@@ -13,7 +13,7 @@
         <h2> <?php echo $titre; ?></h2>
     </div>
     <br><br>
-    <div class="container">
+    <div class="container2">
         <div class="col-menu">
             <a href="index.php">Sortir</a> <br>
             <a href="index.php?controleur=accueil&action=menu">Menu général</a> <br>

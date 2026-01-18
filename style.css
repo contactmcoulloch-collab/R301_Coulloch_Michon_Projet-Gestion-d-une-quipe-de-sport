@@ -2,12 +2,35 @@
 body {font-family: Arial, Helvetica, sans-serif;
     font-size: large;
     color: darkgreen;   
-        align-items: center;
+    align-items: center;
     width: 98%;
     margin: auto;
-text-align: center;}
-
-h2 {border-bottom: 5px solid darkgreen;
+    text-align: center;}
+    
+    .container {
+        display: flex;
+        gap: 20px;
+    }
+    .rectangle {
+        width: 150px;
+        height: 200px;
+        background-color: #4CAF50;
+        color: white;
+        text-align: center;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        text-decoration: none;
+        font-size: 18px;
+        border-radius: 10px;
+        transition: background-color 0.3s;
+    }
+    
+    .rectangle:hover {
+       background-color: #45a049;
+    }
+    
+    h2 {border-bottom: 5px solid darkgreen;
         background-color: lightblue;
         font-size: 1.3em;
     width:auto;}
@@ -32,7 +55,7 @@ thead {border: 1px solid darkgreen;
         font-size: 1.3em;
         color: darkred;
         width:auto;}
-.container {
+.container2 {
     margin: 5px;
     overflow:auto;
 
@@ -44,3 +67,13 @@ thead {border: 1px solid darkgreen;
 .col-2 { width:18%; float:left; border: 1px solid darkgreen; margin: 5px;}
 .col-3 { width:46%; float:left; border: 1px solid darkgreen; margin: 5px;}
 .panel div {background-color: aliceblue;}
+
+/* body {
+             display: flex;
+             justify-content: center;
+             align-items: center;
+             height: 100vh;
+             margin: 0;
+             background-color: #f0f0f0;
+         } */
+

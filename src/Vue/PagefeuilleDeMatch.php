@@ -46,7 +46,7 @@ require __DIR__ . '/menu.php'; ?>
         </h3>
     </div>
 
-    <div class="container">
+    <div class="container2">
         <?php
         if ($idjoueur_prepa == "") {
             echo '        <div class="col-1">
