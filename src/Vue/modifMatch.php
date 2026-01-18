@@ -17,16 +17,10 @@ $idjoueur=$_GET['idmatch'];
     $domicile=$row['DOMICILE'];
     $victoire=$row['VICTOIRE'];
     $resultat=$row['RESULTAT'];
-?>
-<!DOCTYPE html>
-<html lang="fr">
-<head>
-<meta charset="UTF-8">
-<title>Modification Match</title>
-</head>
-<body>
+$titre="Modifier le match";
 
-<h2>Modifier le match</h2>
+require __DIR__ . '/menu.php'; ?>
+</h2>
 
 <form action="index.php?controleur=match&action=modifier"
 method="post">

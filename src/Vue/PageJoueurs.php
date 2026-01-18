@@ -6,28 +6,19 @@ require __DIR__ . '/../DAO/connexion_DAO.php';
 require __DIR__ . '/../DAO/joueur_DAO.php';
 
 $joueurs = listerJoueurs($pdo);
+$titre = "Liste des joueurs";
+require __DIR__ . '/menu.php';
 ?>
-<head>
-<meta charset="UTF-8">
-<title>Mes Joueurs</title>
-<style>
-table, th, td {
-  border:1px solid black;
-}
-</style>
-</head>
 
-<body>
-<h2>Liste des joueurs</h2>
 
 <a href= "index.php?controleur=joueur&action=creer">Creer Joueur</a>
 <br>
 <br>
 <?php
-echo "<table>
+echo '<table>
 <thead>
+<tr><th colspan="6">Liste des joueurs</th></tr>
 <tr>
-<th>ID</th>
 <th>Nom</th>
 <th>Prénom</th>
 <th>N° Licence</th>
@@ -35,11 +26,10 @@ echo "<table>
 <th>Supprimer</th>
 
 </tr>
-</thead><tbody>";
+</thead><tbody>';
 
 foreach ($joueurs as $row) {
     echo "<tr>
-    <td>".$row['IDJOUEUR']."</td>
     <td>".$row['NOM']."</td>
     <td>".$row['PRENOM']."</td>
     <td>".$row['NUMERODELICENCE']."</td>

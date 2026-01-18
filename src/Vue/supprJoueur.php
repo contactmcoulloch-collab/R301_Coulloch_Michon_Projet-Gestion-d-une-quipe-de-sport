@@ -5,5 +5,5 @@ require __DIR__ . '/../DAO/joueur_DAO.php';
 
     supprimerJoueur($pdo, $idjoueur);
 
-    header('Location: index.php?controleur=joueur&action=');
+    header('Location: index.php?controleur=joueur&action=liste');
 ?>

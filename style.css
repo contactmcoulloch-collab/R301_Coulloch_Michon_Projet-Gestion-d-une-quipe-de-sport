@@ -1,0 +1,46 @@
+
+body {font-family: Arial, Helvetica, sans-serif;
+    font-size: large;
+    color: darkgreen;   
+        align-items: center;
+    width: 98%;
+    margin: auto;
+text-align: center;}
+
+h2 {border-bottom: 5px solid darkgreen;
+        background-color: lightblue;
+        font-size: 1.3em;
+    width:auto;}
+h3 {border-bottom: 4px solid darkgreen;
+        background-color: lightblue;
+        font-size: 1.1em;
+    width:fit-content;}
+h4 {border-bottom: 3px solid darkgreen;
+        background-color: lightblue;
+        font-size: 1.1em;
+        width:fit-content;}
+table {width: 100%;}
+th {text-align: left; border-bottom: 2px solid darkgreen;}
+td {text-align: left; border-bottom: 1px solid darkgreen; margin-bottom: 4px;}
+thead {border: 1px solid darkgreen;
+        background-color: lightblue;
+        font-size: 1.1em;
+    font-weight: bold;}
+
+.error {border: 3px solid red;
+        background-color: lightgoldenrodyellow;
+        font-size: 1.3em;
+        color: darkred;
+        width:auto;}
+.container {
+    margin: 5px;
+    overflow:auto;
+
+      }
+
+.col-menu { width:15%; float:left; border: 1px solid darkgreen; margin: 5px; background-color: aquamarine;}
+.col-body { width:83%; float:left; border: 1px solid darkgreen; margin: 5px;}
+.col-1 { width:46%; float:left; border: 1px solid darkgreen; margin: 5px;}
+.col-2 { width:18%; float:left; border: 1px solid darkgreen; margin: 5px;}
+.col-3 { width:46%; float:left; border: 1px solid darkgreen; margin: 5px;}
+.panel div {background-color: aliceblue;}

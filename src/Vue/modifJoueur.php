@@ -17,16 +17,10 @@ $idjoueur=$_GET['idjoueur'];
     $taille=$row['TAILLE'];
     $poids=$row['POIDS'];
     $statut=$row['STATUT'];
-?>
-<!DOCTYPE html>
-<html lang="fr">
-<head>
-<meta charset="UTF-8">
-<title>Modification joueur</title>
-</head>
-<body>
+$titre="Modofocation d'un joueur";
 
-<h2>Modifier le joueur</h2>
+require __DIR__ . '/menu.php'; ?>
+
 
 <form action="index.php?controleur=joueur&action=modifier"
  method="post">

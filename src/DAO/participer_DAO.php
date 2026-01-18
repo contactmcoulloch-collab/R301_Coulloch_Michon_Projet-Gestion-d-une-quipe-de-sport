@@ -2,7 +2,7 @@
 
 function allParticipants(PDO $linkpdo, $idmatch): array
 {
-    $lreq = "SELECT * FROM JOUEUR where IDJOUEUR IN (SELECT IDJOUEUR FROM PARTICIPER WHERE IDMATCH= :idmatch);";
+    $lreq = "SELECT j.IDJOUEUR, j.NOM, j.PRENOM, j.NUMERODELICENCE, p.NOTE, p.POSTE, p.TITULAIRE FROM JOUEUR j, PARTICIPER p where j.IDJOUEUR = p.IDJOUEUR AND p.IDMATCH= :idmatch;";
  //   $lreq = "SELECT JOUEUR.*, POSTE, TITULAIRE, IDMATCH FROM JOUEUR, PARTICIPER where PARTICIPER.IDMATCH = :idmatch AND PARTICIPER.IDJOUEUR = JOUEUR.IDJOUEUR;";
     $req = $linkpdo->prepare($lreq);
     $req->execute(['idmatch'  => $idmatch]);
