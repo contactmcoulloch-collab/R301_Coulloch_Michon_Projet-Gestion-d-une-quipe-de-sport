@@ -15,8 +15,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'GET') {
     require __DIR__ . '/menu.php';
 
 ?>
+<h4>Saisie d'un commentaire pour : 
          <?php echo $joueur['NOM'] . ' ' . $joueur['PRENOM'] ?>
-</h2> 
+</h4> 
             
             <div class="panel">
             <form action="index.php?controleur=joueur&action=commenter"
@@ -26,8 +27,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'GET') {
             <input type="text" name="TITRE" value=""><br>
             
             Détail commentaire :
-            <input type="text" name="DETAIL" value=""><br>
-            <input type="text" name="IDJOUEUR" value="<?php echo $joueur['IDJOUEUR'] ?>"><br>
+            <textarea name="DETAIL" rows="3" cols="100"></textarea><br>
+            <input type="hidden" name="IDJOUEUR" value="<?php echo $joueur['IDJOUEUR'] ?>"><br>
             <input type="submit" value="Creer">
             </form>
 </div>
@@ -66,8 +67,8 @@ foreach ($commentaires as $com) {
 else {
 
     $idjoueur = $_POST['IDJOUEUR'];
-    $detail = $_POST['TITRE'];
-    $titre = $_POST['DETAIL'];
+    $detail = $_POST['DETAIL'];
+    $titre =  $_POST['TITRE'];
 
 
     creerCommentaire($pdo, $idjoueur, $titre, $detail);

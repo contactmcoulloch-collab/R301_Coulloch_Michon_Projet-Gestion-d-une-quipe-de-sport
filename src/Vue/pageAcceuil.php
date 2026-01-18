@@ -36,8 +36,7 @@ Mot de passe :<input type="password" name="MDP"><br>
 if ($action == "connecter") {
     $login = $_POST["LOGIN"];
     $mdp = $_POST["MDP"];
-    if ($login == "moi" && $mdp == "a") {
-        echo "bloc connecter -> ok";
+    if ($login == "moi" && $mdp == "1234") {
         $action = "menuGen";
     } else {
         echo '<div class = "error"> login ou mot de passe incorrect</div><br><br>';

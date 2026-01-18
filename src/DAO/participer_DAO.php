@@ -116,6 +116,24 @@ function retirer_joueurs(PDO $linkpdo, $idjoueur,$idmatch): ?array
     return [];
 }
 
+function retirer_joueurs_allMatch(PDO $linkpdo, $idjoueur): ?array
+{
+    $req = $linkpdo->prepare(
+        'DELETE FROM PARTICIPER WHERE IDJOUEUR = :idjoueur;'
+    );
+    $var = array(
+        'idjoueur' => $idjoueur
+    );
+
+    try {
+        $req->execute($var);
+    }
+    catch (Exception $e) {
+        return ['Erreur : ' . $e->getMessage()];
+    }
+    return [];
+}
+
 function ajouter_joueurs(PDO $linkpdo, $poste,$titulaire,$note,$idjoueur,$idmatch): ?array
 {
     $req = $linkpdo->prepare(

@@ -24,7 +24,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'GET') {
 
     require __DIR__ . '/menu.php'; ?>
     </h2>
-
+    <h3>Informations du Match</h3> 
     <form action="index.php?controleur=match&action=modifier" method="post">
 
         ID Match :<input type="text" name="IDMATCH" value="<?php echo $idmatch; ?>"><br>
@@ -35,12 +35,17 @@ if ($_SERVER['REQUEST_METHOD'] === 'GET') {
         Domicile :<select name="DOMICILE">
             <option value="1" <?php if ($domicile == "1") {
                 echo "SELECTED";
-            } ?>>Oui</option>
+                } ?>>Oui</option>
             <option value="0" <?php if ($domicile == "0") {
                 echo "SELECTED";
-            } ?>>Non</option>
+                } ?>>Non</option>
         </select>
         <br>
+        <br>
+        <input type="submit" value="Sauvegarder">
+    </form>
+    <h3>Saisi des Résultats du Match</h3>
+    <form action="index.php?controleur=match&action=noter" method="post">
         Victoire :<select name="VICTOIRE">
             <option value="2" <?php if ($victoire == "2") {
                 echo "SELECTED";
@@ -52,12 +57,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'GET') {
                 echo "SELECTED";
             } ?>>Perdu</option>
         </select>
-        </br>
+        <br>
         Résultat :<input type="text" name="RESULTAT" value="<?php echo $resultat; ?>"><br>
-        <input type="submit" value="Sauvegarder">
-    </form>
-
-    <form action="index.php?controleur=match&action=noter" method="post">
+        <br>
+        <br>
         <table>
             <thead>
                 <tr>
@@ -78,7 +81,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'GET') {
                 foreach ($inscrits as $joueurOccupe) {
                     $i++;
                     echo "<tr><td>" . $joueurOccupe['NOM'] . "  " . $joueurOccupe['PRENOM'] . "</td>
-                        <td>" . $joueurOccupe['NUMERODELICENCE'] . "</td>
+                    <td>" . $joueurOccupe['NUMERODELICENCE'] . "</td>
                         <td>" . $joueurOccupe['POSTE'] . "</td>
                         <td>" . $joueurOccupe['TITULAIRE'];
                     echo "</td><td>" . "<input type='numeric' name='note_" . $i . "' value =".$joueurOccupe['NOTE']."> 
@@ -87,6 +90,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'GET') {
 
             </tbody>
         </table>
+        <br>
         <input type="submit" value="Sauvegarder">
     </form>
 
@@ -104,8 +108,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'GET') {
         $equipeadv = $_POST['EQUIPEADV'];
         $lieu = $_POST['LIEU'];
         $domicile = $_POST['DOMICILE'];
-        $victoire = $_POST['VICTOIRE'];
-        $resultat = $_POST['RESULTAT'];
     matchs_modifier($pdo, $idmatch, $date, $heure, $equipeadv, $lieu, $domicile, $victoire, $resultat);
     } else {
         var_dump($_POST);
@@ -118,6 +120,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'GET') {
                 updateJoueurNote($pdo, $_POST[$idj],$_POST['IDMATCH'], $_POST[$key]);
             }
         }
+        $idmatch = $_POST['IDMATCH'];
+        $victoire = $_POST['VICTOIRE'];
+        $resultat = $_POST['RESULTAT'];
+        updateMatchResultat($pdo,$idmatch,$victoire,$resultat);
     }
 
 

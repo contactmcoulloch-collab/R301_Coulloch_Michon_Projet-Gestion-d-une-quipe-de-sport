@@ -125,6 +125,19 @@ function modifierJoueur(PDO $linkpdo, $idjoueur, $nom, $prenom, $licence, $daten
     $req->execute($var);
 }
 
+function supprimer_commentaires(PDO $linkpdo,$id){
+    $req = $linkpdo->prepare(
+        'DELETE FROM COMMENTAIRE WHERE IDJOUEUR = :id;'
+
+    );
+    $var = array(
+        'id' => $id
+    );
+
+    $req->execute($var);
+}
+
+
 function supprimerJoueur(PDO $linkpdo, $id)
 {
     $req = $linkpdo->prepare(
@@ -177,8 +190,12 @@ HAVING nb = (
     );
     $req->execute($var);
     $poste = $req->fetch(PDO::FETCH_ASSOC);
-    return $poste["POSTE"];
+    if ($poste === false) {
+        return "";
     }
+
+    return $poste['POSTE'];
+}
 function countTitulaire(PDO $linkpdo, $idjoueur)
 {
     $req = $linkpdo->prepare("SELECT COUNT(*) as nb FROM PARTICIPER WHERE IDJOUEUR = :idjoueur
