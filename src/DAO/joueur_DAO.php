@@ -239,6 +239,15 @@ WHERE p.IDJOUEUR = :idjoueur
         return 0;
     }
 }
+function statutActuel(PDO $linkpdo, $idjoueur){
+    $req = $linkpdo->prepare('SELECT STATUT FROM JOUEUR WHERE IDJOUEUR = :idjoueur;');
+    $var = array(
+        ':idjoueur' => $idjoueur
+    );
+    $req->execute($var);
+    $statut = $req->fetch(PDO::FETCH_ASSOC)['STATUT'];
+    return $statut;
+}
 
 function nbSelectionConsecutive(PDO $linkpdo, $idjoueur)
 {
@@ -247,5 +256,6 @@ function nbSelectionConsecutive(PDO $linkpdo, $idjoueur)
         ':idjoueur' => $idjoueur
     );
 }
+
 
 

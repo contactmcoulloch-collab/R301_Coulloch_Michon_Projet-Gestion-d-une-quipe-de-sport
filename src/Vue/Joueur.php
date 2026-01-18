@@ -10,7 +10,7 @@ class Joueur
     private int $taille;
     private int $poids;
     private String $statut;
-    private array(50) $commentaires;
+    private array $commentaires;
 
     function __construct(String $id, String $n, String $p, String $numL, DateTime $ddn, int $t, int $pds, String $stat){
         this->id = $id;
@@ -23,7 +23,7 @@ class Joueur
         this->statut = $stat;
     }
 
-    fuction addComment(String $id, String $t, String $txt){
+    function addComment(String $id, String $t, String $txt){
         this->commentaires[$id] = new Commentaire($id,$t,$txt);
     }
 }

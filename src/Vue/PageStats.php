@@ -27,19 +27,16 @@ require __DIR__ . '/menu.php';
     <th>Pourcentage Matchs nuls</th>
 
     <?php
-//    foreach($matchs as $row){
-//     echo "
-//     <tr>
-//     <td>".$row["IDMATCH"]."</td>
-//     <td>".postePrefere($pdo,$row["IDJOUEUR"])."</td>
-//     <td>".countTitulaire($pdo,$row["IDJOUEUR"])."</td>
-//     <td>".countRemplace($pdo,$row["IDJOUEUR"])."</td>
-//     <td>".moyenneEval($pdo,$row["IDJOUEUR"])."</td>
-//     <td>".pourcentageVictoire($pdo,$row["IDJOUEUR"])."</td>
-//     <td>Pas encore fait</td>
-//     </tr>";
-    
-//    }
+    echo"
+    <tr>
+    <td>".nbMatchs($pdo)."</td>
+    <td>".nbVictoires($pdo)."</td>
+    <td>".nbMatchsNuls($pdo)."</td>
+    <td>".nbDefaites($pdo)."</td>
+    <td>".(nbVictoires($pdo)*100)/nbMatchs($pdo)."%</td>
+    <td>".(nbMatchsNuls($pdo)*100)/nbMatchs($pdo)."%</td>
+    <td>".(nbDefaites($pdo)*100)/nbMatchs($pdo)."%</td>
+    </tr>";
 ?>
 </table>
 
@@ -63,13 +60,13 @@ require __DIR__ . '/menu.php';
     echo "
     <tr>
     <td>".$row["NOM"]."</td>
-    <td>ooooooooo</td> 
+    <td>".statutActuel($pdo,$row["IDJOUEUR"])."</td> 
     <td>".postePrefere($pdo,$row["IDJOUEUR"])."</td>
     <td>".countTitulaire($pdo,$row["IDJOUEUR"])."</td>
     <td>".countRemplace($pdo,$row["IDJOUEUR"])."</td>
     <td>".moyenneEval($pdo,$row["IDJOUEUR"])."</td>
     <td>".pourcentageVictoire($pdo,$row["IDJOUEUR"])."%</td>
-    <td>Pas encore fait</td>
+    <td>N/A</td>
     </tr>";
     
    }

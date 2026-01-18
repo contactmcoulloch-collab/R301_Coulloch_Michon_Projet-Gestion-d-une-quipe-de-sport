@@ -138,13 +138,12 @@ function matchs_valider( $idmatch, $date, $heure, $equipeadv, $lieu, $domicile, 
 
 function updateMatchResultat($linkpdo, $idmatch, $victoire, $resultat)
 {
-   $stmt = "UPDATE LE_MATCH SET
-        VICTOIRE = :victoire,
-        RESULTAT = :resultat
-        WHERE IDMATCH = :idmatch";
 
     
-    $req = $linkpdo->prepare($stmt);
+    $req = $linkpdo->prepare("UPDATE LE_MATCH SET
+        VICTOIRE = :victoire,
+        RESULTAT = :resultat
+        WHERE IDMATCH = :idmatch;");
     
     $var = array(
         'victoire' => $victoire,
@@ -159,4 +158,32 @@ function updateMatchResultat($linkpdo, $idmatch, $victoire, $resultat)
         return ['Erreur : ' . $e->getMessage()];
     }
     return [];
+ }
+
+ function nbMatchs($linkpdo){
+    $req = $linkpdo->prepare('SELECT COUNT(*) as nb FROM LE_MATCH;');
+    $req->execute();
+    $nbMatch=$req->fetch(PDO::FETCH_ASSOC)['nb'];
+    return $nbMatch;
+ }
+
+  function nbVictoires($linkpdo){
+    $req = $linkpdo->prepare('SELECT COUNT(*) as nb FROM LE_MATCH WHERE VICTOIRE = 2;');
+    $req->execute();
+    $nbMatch=$req->fetch(PDO::FETCH_ASSOC)['nb'];
+    return $nbMatch;
+ }
+
+   function nbMatchsNuls($linkpdo){
+    $req = $linkpdo->prepare('SELECT COUNT(*) as nb FROM LE_MATCH WHERE VICTOIRE = 1;');
+    $req->execute();
+    $nbMatch=$req->fetch(PDO::FETCH_ASSOC)['nb'];
+    return $nbMatch;
+ }
+
+   function nbDefaites($linkpdo){
+    $req = $linkpdo->prepare('SELECT COUNT(*) as nb FROM LE_MATCH WHERE VICTOIRE = 0;');
+    $req->execute();
+    $nbMatch=$req->fetch(PDO::FETCH_ASSOC)['nb'];
+    return $nbMatch;
  }
