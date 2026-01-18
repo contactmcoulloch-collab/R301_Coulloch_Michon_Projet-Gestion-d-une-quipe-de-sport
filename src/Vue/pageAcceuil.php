@@ -1,22 +1,27 @@
 <?php
 $titre = "Accueil général / Connexion";
 // var_dump($isconnecte);
-// require __DIR__ . '/menu.php';
-;
+
 ?>
 <!DOCTYPE html>
 <html lang="fr">
     <head>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <link rel="stylesheet" href="style2.css">
+        <link rel="stylesheet" href="style.css">
     <title>accueil</title>
 </head>
 <body>
+
+    <div class="panel titre">
+        <h2> <?php echo $titre; ?></h2>
+    </div>
+    <br>
+    <br>
 <?php
 //   echo "Entree dans la vue N°".$isconnecte;
-if ($isconnecte == 0) {
-    echo '<div class = "container" id = "divLogin">
+if ($action == "") {
+    echo '<div class = "panel container" id="divLogin">
             <form action="index.php?controleur=accueil&action=connecter"
 method="post">
 
@@ -27,18 +32,16 @@ Mot de passe :<input type="password" name="MDP"><br>
 
 </div>';
 
-} else if ($isconnecte == 1) {
+} else
+if ($action == "connecter") {
     $login = $_POST["LOGIN"];
     $mdp = $_POST["MDP"];
     if ($login == "moi" && $mdp == "a") {
-        echo '<div class="container" id = "divMenu">
-        <a href="index.php?controleur=joueur" class="rectangle">Mes Joueurs</a>
-        <a href="index.php?controleur=match" class="rectangle">Matchs</a>
-        <a href="index.php?controleur=stats" class="rectangle">Statistiques</a>
-    </div>';
+        echo "bloc connecter -> ok";
+        $action = "menuGen";
     } else {
         echo '<div class = "error"> login ou mot de passe incorrect</div><br><br>';
-        echo '<div class = "container2" id = "divLogin">;
+        echo '<div class = "panel container2" id = "divLogin">;
     <form action="index.php?controleur=accueil&action=connecter"
 method="post">
 
@@ -50,14 +53,17 @@ Mot de passe :<input type="password" name="MDP" value="' . $mdp . '"><br>
 </div>';
     }
 
-} else {
-    echo '<div class="container" id = "divMenu">
+}  
+ if ($action == "menuGen"){
+    echo '<div>
+    <div class="container" id = "divMenu">
         <a href="index.php?controleur=joueur" class="rectangle">Mes Joueurs</a>
         <a href="index.php?controleur=match" class="rectangle">Matchs</a>
-        <a href="index.php?controleur=stats" class="rectangle">Statistiques</a>
+         <a href="index.php?controleur=stats" class="rectangle">Statistiques</a>
+    </div>
     </div>';
 
-    header('Location: index.php?controleur=accueil&action=menuGen');
+    
 } ?>
 </body>
 

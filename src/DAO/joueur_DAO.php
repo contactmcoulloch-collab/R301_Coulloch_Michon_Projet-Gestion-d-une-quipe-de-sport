@@ -19,7 +19,7 @@ function lireJoueur(PDO $linkpdo, $id)
 {
     $lreq = "SELECT * FROM JOUEUR where IDJOUEUR = :id";
     $req = $linkpdo->prepare($lreq);
-    $req->execute(['id'  => $id]);
+    $req->execute(['id' => $id]);
     $joueur = $req->fetch(PDO::FETCH_ASSOC);
     return $joueur;
 }
@@ -60,7 +60,7 @@ function creerJoueur(PDO $linkpdo, $id, $nom, $prenom, $licence, $datenais, $tai
         'statut' => $statut,
     );
 
-        $req->execute($var);
+    $req->execute($var);
 
 }
 
@@ -87,19 +87,19 @@ function creerCommentaire(PDO $linkpdo, $idjoueur, $titre, $texte)
              "
     );
     $var = array(
-        'id' => $resid['oldid']+1,
+        'id' => $resid['oldid'] + 1,
         'titre' => $titre,
         'texte' => $texte,
         'idjoueur' => $idjoueur,
     );
 
-        $req->execute($var);
+    $req->execute($var);
 
 }
 
 function modifierJoueur(PDO $linkpdo, $idjoueur, $nom, $prenom, $licence, $datenais, $taille, $poids, $statut)
 {
-   $req = $linkpdo->prepare(
+    $req = $linkpdo->prepare(
         "UPDATE JOUEUR 
          SET NOM = :nom,
              PRENOM = :prenom,
@@ -122,8 +122,8 @@ function modifierJoueur(PDO $linkpdo, $idjoueur, $nom, $prenom, $licence, $daten
         'idjoueur' => $idjoueur,
     );
 
-        $req->execute($var);
-  }
+    $req->execute($var);
+}
 
 function supprimerJoueur(PDO $linkpdo, $id)
 {
@@ -135,12 +135,12 @@ function supprimerJoueur(PDO $linkpdo, $id)
         'id' => $id
     );
 
-        $req->execute($var);
- }
+    $req->execute($var);
+}
 
- function listerJoueursDispos(PDO $linkpdo, $idmatch)
- {
-     $req = $linkpdo->prepare("
+function listerJoueursDispos(PDO $linkpdo, $idmatch)
+{
+    $req = $linkpdo->prepare("
          SELECT j.* FROM JOUEUR j
           WHERE j.STATUT NOT IN ('Absent','Malade')
           AND   j.IDJOUEUR NOT IN (   
@@ -149,76 +149,91 @@ function supprimerJoueur(PDO $linkpdo, $id)
             WHERE p2.IDMATCH = :idmatch 
             )");
     $var = array(
-        ':idmatch'=> $idmatch
+        ':idmatch' => $idmatch
     );
-        $req->execute($var);
-        $joueurs = $req->fetchAll(PDO::FETCH_ASSOC);
-        return $joueurs;
- 
- }
+    $req->execute($var);
+    $joueurs = $req->fetchAll(PDO::FETCH_ASSOC);
+    return $joueurs;
 
- function postePrefere(PDO $linkpdo, $idjoueur){
-    $req = $linkpdo->prepare("SELECT p.POSTE
+}
+
+function postePrefere(PDO $linkpdo, $idjoueur)
+{
+    $req = $linkpdo->prepare("SELECT p.POSTE, COUNT(*) AS nb
 FROM PARTICIPER p
 WHERE p.IDJOUEUR = :idjoueur
 GROUP BY p.POSTE
-HAVING COUNT(*) = (
-  SELECT MAX(cnt)
-  FROM (
-    SELECT COUNT(*) AS cnt
-    FROM PARTICIPER
-    WHERE IDJOUEUR = :idjoueur
-    GROUP BY POSTE
-  ));");
-      $var = array(
-        ':idjoueur'=> $idjoueur
+HAVING nb = (
+    SELECT MAX(cnt)
+    FROM (
+        SELECT COUNT(*) AS cnt
+        FROM PARTICIPER
+        WHERE IDJOUEUR = :idjoueur
+        GROUP BY POSTE
+    ) x
+);");
+    $var = array(
+        ':idjoueur' => $idjoueur
     );
-        return $req->execute($var);
- }
- function countTitulaire(PDO $linkpdo,$idjoueur){
-    $req = $linkpdo->prepare("SELECT COUNT(*) FROM PARTICIPER WHERE IDJOUEUR = :idjoueur
+    $req->execute($var);
+    $poste = $req->fetch(PDO::FETCH_ASSOC);
+    return $poste["POSTE"];
+    }
+function countTitulaire(PDO $linkpdo, $idjoueur)
+{
+    $req = $linkpdo->prepare("SELECT COUNT(*) as nb FROM PARTICIPER WHERE IDJOUEUR = :idjoueur
     AND TITULAIRE = 'Titulaire';");
-        $var = array(
-        ':idjoueur'=> $idjoueur
+    $var = array(
+        ':idjoueur' => $idjoueur
     );
-        return $req->execute($var);
- }
+     $req->execute($var);
+     $t = $req->fetch(PDO::FETCH_ASSOC);
+     return $t['nb'];
+}
 
- function countRemplace(PDO $linkpdo,$idjoueur){
-    $req = $linkpdo->prepare("SELECT COUNT(*) FROM PARTICIPER WHERE IDJOUEUR = :idjoueur
+function countRemplace(PDO $linkpdo, $idjoueur)
+{
+    $req = $linkpdo->prepare("SELECT COUNT(*) as nb FROM PARTICIPER WHERE IDJOUEUR = :idjoueur
     AND TITULAIRE = 'Remplaçant';");
-        $var = array(
-        ':idjoueur'=> $idjoueur
+    $var = array(
+        ':idjoueur' => $idjoueur
     );
-        return $req->execute($var);
- }
+    $req->execute($var);
+     $t = $req->fetch(PDO::FETCH_ASSOC);
+     return $t['nb'];
+}
 
- function moyenneEval(PDO $linkpdo,$idjoueur){
+function moyenneEval(PDO $linkpdo, $idjoueur)
+{
     $req = $linkpdo->prepare('SELECT AVG(NOTE) FROM PARTICIPER WHERE IDJOUEUR = :idjoueur;');
     $var = array(
-        ':idjoueur'=> $idjoueur
+        ':idjoueur' => $idjoueur
     );
-        return $req->execute($var);
- }
+    return $req->execute($var);
+}
 
- function pourcentageVictoire(PDO $linkpdo,$idjoueur){
+function pourcentageVictoire(PDO $linkpdo, $idjoueur)
+{
     $req = $linkpdo->prepare('SELECT COUNT(*)
 FROM PARTICIPER p
 JOIN LE_MATCH m ON m.IDMATCH = p.IDMATCH
 WHERE p.IDJOUEUR = :idjoueur
   AND m.VICTOIRE = 1;
 ');
-    $nbPart = $linkpdo->prepare('SELECT COUNT(*) FROM PARTICIPER WHERE IDJOUER = :idjoueur;');
-     $var = array(
-        ':idjoueur'=> $idjoueur
+    $nbPart = $linkpdo->prepare('SELECT COUNT(*) FROM PARTICIPER WHERE IDJOUEUR = :idjoueur;');
+    $var = array(
+        ':idjoueur' => $idjoueur
     );
 
     $victoires = $req->execute($var);
     $nb = $nbPart->execute($var);
-    return ($victoires*100)/ $nb;
- }
+    return ($victoires * 100) / $nb;
+}
 
- function nbSelectionConsecutive(PDO $linkpdo,$idjoueur){
+function nbSelectionConsecutive(PDO $linkpdo, $idjoueur)
+{
     $req = $linkpdo->prepare('');
-
- }
+    $var = array(
+        ':idjoueur' => $idjoueur
+    );
+}
