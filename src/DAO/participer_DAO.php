@@ -138,4 +138,22 @@ function ajouter_joueurs(PDO $linkpdo, $poste,$titulaire,$note,$idjoueur,$idmatc
     }
     return [];
 }
+
+function updateJoueurNote($linkpdo,$idjoueur,$idmatch, $note)
+{
+    $req = $linkpdo->prepare(
+        "UPDATE PARTICIPER
+         SET NOTE = :note
+         WHERE IDJOUEUR = :idjoueur
+         AND IDMATCH = :idmatch"
+
+    );
+    $var = array(
+        'note' => $note,
+        'idjoueur' => $idjoueur,
+        'idmatch' => $idmatch,
+    );
+
+    $req->execute($var);
+}
 ?>

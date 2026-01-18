@@ -15,16 +15,11 @@ if ($_SERVER['REQUEST_METHOD'] === 'GET') {
     $victoire = '';
     $resultat = '';
 
-?>
-<!DOCTYPE html>
-<html lang="fr">
-<head>
-<meta charset="UTF-8">
-<title>Création Match</title>
-</head>
-<body>
+$titre ="Planifier un match";
+require __DIR__ . '/menu.php';
 
-<h2>Créer le match</h2>
+?>
+
 
 <div class="panel">
 <form action="index.php?controleur=match&action=creer" method="post">
@@ -46,20 +41,14 @@ Lieu :
 
 Domicile :
 <select name="Domicile">
-    <option value="Oui">Oui</option>
+    <option value="Oui" SELECTED>Oui</option>
     <option value="Non">Non</option>
 </select>
 <br>
 
-Victoire :
-<select name="Victoire">
-    <option value="Oui">Oui</option>
-    <option value="Non">Non</option>
-</select>
-<br>
 
-Résultat :
-<input type="text" name="Resultat" value="<?php echo $resultat; ?>"><br>
+
+<input type="hidden" name="Resultat" value=""><br>
 
 <input type="submit" value="Créer">
 </form>

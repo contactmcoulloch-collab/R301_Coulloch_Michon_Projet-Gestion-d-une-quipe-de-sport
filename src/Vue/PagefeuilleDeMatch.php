@@ -57,15 +57,18 @@ require __DIR__ . '/menu.php'; ?>
                         <th>Nom</h>
                         <th>Taille</th>
                         <th>Poids</th>
-                        <th>Stats joueur</th>
+                        <th>Moyenne des Notes</th>
                         <th>Action</th>
                     </tr>
                 </thead>
                 <tbody> ';
 
             foreach ($disponibles as $joueurLibre) {
-                echo "<tr><td>" . $joueurLibre['NOM'] . "  " . $joueurLibre['PRENOM'] . "</td><td>" . $joueurLibre['POIDS'] . "</td><td>" . $joueurLibre['TAILLE'];
-                echo "</td><td> &nbsp </td><td>" . "<a href='index.php?controleur=feuille&action=preparer&idmatch=" . $idmatch . "&idjoueur=" . $joueurLibre['IDJOUEUR'] . "'> ajouter au match </a></td></tr>";
+                echo "<tr><td>" . $joueurLibre['NOM'] . "  " . $joueurLibre['PRENOM'] . "</td>
+                <td>" . $joueurLibre['POIDS'] . "</td>
+                <td>" . $joueurLibre['TAILLE'];
+                echo "</td>".moyenneEval($pdo,$joueurLibre['IDJOUEUR'])."<td> &nbsp </td>
+                <td>" . "<a href='index.php?controleur=feuille&action=preparer&idmatch=" . $idmatch . "&idjoueur=" . $joueurLibre['IDJOUEUR'] . "'> ajouter au match </a></td></tr>";
             }
             echo '
 

@@ -205,29 +205,39 @@ function countRemplace(PDO $linkpdo, $idjoueur)
 
 function moyenneEval(PDO $linkpdo, $idjoueur)
 {
-    $req = $linkpdo->prepare('SELECT AVG(NOTE) FROM PARTICIPER WHERE IDJOUEUR = :idjoueur;');
+    $req = $linkpdo->prepare('SELECT AVG(NOTE) as m FROM PARTICIPER WHERE IDJOUEUR = :idjoueur;');
     $var = array(
         ':idjoueur' => $idjoueur
     );
-    return $req->execute($var);
+    $req->execute($var);
+    $m = $req->fetch(PDO::FETCH_ASSOC)['m'];
+     return $m;
 }
 
 function pourcentageVictoire(PDO $linkpdo, $idjoueur)
 {
-    $req = $linkpdo->prepare('SELECT COUNT(*)
+    $req = $linkpdo->prepare('SELECT COUNT(*) as nb
 FROM PARTICIPER p
 JOIN LE_MATCH m ON m.IDMATCH = p.IDMATCH
 WHERE p.IDJOUEUR = :idjoueur
-  AND m.VICTOIRE = 1;
+  AND m.VICTOIRE = 2;
 ');
-    $nbPart = $linkpdo->prepare('SELECT COUNT(*) FROM PARTICIPER WHERE IDJOUEUR = :idjoueur;');
     $var = array(
         ':idjoueur' => $idjoueur
     );
-
-    $victoires = $req->execute($var);
-    $nb = $nbPart->execute($var);
-    return ($victoires * 100) / $nb;
+    $req->execute($var);
+    $nVic = $req->fetch(PDO::FETCH_ASSOC)['nb'];
+    
+    
+    $reqNbPart = $linkpdo->prepare('SELECT COUNT(*) as nb FROM PARTICIPER WHERE IDJOUEUR = :idjoueur;');
+    $reqNbPart->execute($var);
+    $nParts = $reqNbPart->fetch(PDO::FETCH_ASSOC)['nb'];
+  
+    if ($nParts > 0 ) {
+        return ($nVic * 100) / $nParts;
+    } else {
+        return 0;
+    }
 }
 
 function nbSelectionConsecutive(PDO $linkpdo, $idjoueur)
@@ -237,3 +247,5 @@ function nbSelectionConsecutive(PDO $linkpdo, $idjoueur)
         ':idjoueur' => $idjoueur
     );
 }
+
+

@@ -17,7 +17,7 @@ $idjoueur=$_GET['idjoueur'];
     $taille=$row['TAILLE'];
     $poids=$row['POIDS'];
     $statut=$row['STATUT'];
-$titre="Modofocation d'un joueur";
+$titre="Modification d'un joueur";
 
 require __DIR__ . '/menu.php'; ?>
 

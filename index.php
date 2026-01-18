@@ -32,7 +32,10 @@ switch ($controleur) {
             require __DIR__ . '/src/Vue/supprMatch.php';
         } else if ($action == 'feuille') {
             require __DIR__ . '/src/Vue/PageFeuilleDeMatch.php';
-        } else {
+        } else if ($action == 'noter') {
+            require __DIR__ . '/src/Vue/modifMatch.php';
+        }
+        else {
             require __DIR__ . '/src/Vue/PageMatchs.php';
         }
         break;

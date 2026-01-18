@@ -3,24 +3,18 @@
 require __DIR__ . '/../DAO/connexion_DAO.php';
 require __DIR__ . '/../DAO/joueur_DAO.php';
 
+
 /// AFFICHAGE DU FORMULAIRE
 if ($_SERVER['REQUEST_METHOD'] === 'GET') {
-
+    
     $idJoueur = $_GET['idjoueur'];
     $joueur = lireJoueur($pdo, $idJoueur);
     $commentaires = listerCommentaires($pdo, $idJoueur);
-    var_dump($commentaires);
+
+    $titre ="Planifier un match";
+    require __DIR__ . '/menu.php';
 
 ?>
-<!DOCTYPE html>
-<html lang="fr">
-    <head>
-        <meta charset="UTF-8">
-        <title>Ajouter commentaire</title>
-    </head>
-    <body>
-        
-        <h2>Ajouter un commentaire pour </h2>
          <?php echo $joueur['NOM'] . ' ' . $joueur['PRENOM'] ?>
 </h2> 
             

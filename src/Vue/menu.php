@@ -19,6 +19,6 @@
             <a href="index.php?controleur=accueil&action=menuGen">Menu général</a> <br>
             <a href="index.php?controleur=joueur&action=liste">Joueurs</a> <br>
             <a href="index.php?controleur=match&action=liste">Matchs</a> <br>
-            <a href="index.php?controleur=stat&action=liste">Statistiques</a> <br>
+            <a href="index.php?controleur=stats&action=liste">Statistiques</a> <br>
         </div>
         <div class="col-body">

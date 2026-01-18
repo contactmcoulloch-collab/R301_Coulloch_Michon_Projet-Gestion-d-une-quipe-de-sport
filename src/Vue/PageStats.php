@@ -68,7 +68,7 @@ require __DIR__ . '/menu.php';
     <td>".countTitulaire($pdo,$row["IDJOUEUR"])."</td>
     <td>".countRemplace($pdo,$row["IDJOUEUR"])."</td>
     <td>".moyenneEval($pdo,$row["IDJOUEUR"])."</td>
-    <td>".pourcentageVictoire($pdo,$row["IDJOUEUR"])."</td>
+    <td>".pourcentageVictoire($pdo,$row["IDJOUEUR"])."%</td>
     <td>Pas encore fait</td>
     </tr>";
     

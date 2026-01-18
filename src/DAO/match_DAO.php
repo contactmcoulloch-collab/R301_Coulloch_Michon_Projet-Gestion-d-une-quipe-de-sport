@@ -135,3 +135,28 @@ function matchs_valider( $idmatch, $date, $heure, $equipeadv, $lieu, $domicile, 
 
     return $erreurs;
 }
+
+function updateMatchResultat($linkpdo, $idmatch, $victoire, $resultat)
+{
+   $stmt = "UPDATE LE_MATCH SET
+        VICTOIRE = :victoire,
+        RESULTAT = :resultat
+        WHERE IDMATCH = :idmatch";
+
+    
+    $req = $linkpdo->prepare($stmt);
+    
+    $var = array(
+        'victoire' => $victoire,
+        'resultat' => $resultat,
+        'idmatch' => $idmatch
+    );
+   
+    try {
+        $req->execute($var);
+    }
+    catch (Exception $e) {
+        return ['Erreur : ' . $e->getMessage()];
+    }
+    return [];
+ }

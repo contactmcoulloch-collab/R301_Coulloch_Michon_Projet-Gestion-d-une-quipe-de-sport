@@ -15,16 +15,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'GET') {
     $poids = '';
     $statut = '';
 
-?>
-<!DOCTYPE html>
-<html lang="fr">
-<head>
-<meta charset="UTF-8">
-<title>Création joueur</title>
-</head>
-<body>
+    $titre ="Ajouter un Joueur";
+require __DIR__ . '/menu.php';
 
-<h2>Creer le joueur</h2>
+?>
 
 <div class="panel">
 <form action="index.php?controleur=joueur&action=creer"

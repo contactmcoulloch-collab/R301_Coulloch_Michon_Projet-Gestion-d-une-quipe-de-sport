@@ -11,7 +11,7 @@ require __DIR__ . '/menu.php';
 ?>
 
 
-<a href= "index.php?controleur=joueur&action=creer">Creer Joueur</a>
+<a href= "index.php?controleur=joueur&action=creer">Ajouter Joueur</a>
 <br>
 <br>
 <?php
@@ -22,6 +22,7 @@ echo '<table>
 <th>Nom</th>
 <th>Prénom</th>
 <th>N° Licence</th>
+<th>Commenter</th>
 <th>Modifier</th>
 <th>Supprimer</th>
 

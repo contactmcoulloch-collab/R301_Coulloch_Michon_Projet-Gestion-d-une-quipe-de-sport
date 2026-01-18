@@ -33,8 +33,25 @@ echo '<table>
 
 foreach ($matchs as $row){
 
-    $domicile = ($row["DOMICILE"] == 1) ? "Oui" : "Non";
-    $victoire = ($row["VICTOIRE"] == 1) ? "Gagné" : "Perdu";
+    switch ($row["DOMICILE"]){
+        case 1:
+            $domicile = "Oui";
+            break;
+        case 0:
+            $domicile = "Non";
+            break;
+    }
+    switch ($row["VICTOIRE"]){
+        case 2:
+            $victoire = "Gagné";
+            break;
+        case 1:
+            $victoire = "Match Nul";
+            break;
+        case 0:
+            $victoire = "Défaite";
+            break;
+    }
 
     echo '<tr>
    <td>'.$row["DATE"].'</td>
