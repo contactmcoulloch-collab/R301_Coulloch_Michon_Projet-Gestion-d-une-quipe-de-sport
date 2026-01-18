@@ -34,7 +34,7 @@ Mot de passe :<input type="password" name="MDP"><br>
         echo '<div class="container" id = "divMenu">
         <a href="index.php?controleur=joueur" class="rectangle">Mes Joueurs</a>
         <a href="index.php?controleur=match" class="rectangle">Matchs</a>
-        <a href="pageStats.html" class="rectangle">Statistiques</a>
+        <a href="index.php?controleur=stats" class="rectangle">Statistiques</a>
     </div>';
     } else {
         echo '<div class = "error"> login ou mot de passe incorrect</div><br><br>';
@@ -54,7 +54,7 @@ Mot de passe :<input type="password" name="MDP" value="' . $mdp . '"><br>
     echo '<div class="container" id = "divMenu">
         <a href="index.php?controleur=joueur" class="rectangle">Mes Joueurs</a>
         <a href="index.php?controleur=match" class="rectangle">Matchs</a>
-        <a href="pageStats.html" class="rectangle">Statistiques</a>
+        <a href="index.php?controleur=stats" class="rectangle">Statistiques</a>
     </div>';
 
     header('Location: index.php?controleur=accueil&action=menuGen');

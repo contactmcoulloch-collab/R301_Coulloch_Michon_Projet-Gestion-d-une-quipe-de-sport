@@ -32,7 +32,7 @@ if ($_GET['action'] == 'retirer') {
 
 $currentMatch = matchs_trouver($pdo, $idmatch);
 $inscrits = allParticipants($pdo, $idmatch);
-$disponibles = listerJoueursDispos($pdo);
+$disponibles = listerJoueursDispos($pdo,$idmatch);
 $titre="Feuille de match";
 
 require __DIR__ . '/menu.php'; ?>

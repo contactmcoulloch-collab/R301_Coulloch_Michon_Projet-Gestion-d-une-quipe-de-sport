@@ -2,13 +2,14 @@
 /// Connexion MySQL
 require __DIR__ . '/../DAO/connexion_DAO.php';
 require __DIR__ . '/../DAO/match_DAO.php';
+require __DIR__ . '/../DAO/participer_DAO.php';
 
 /// AFFICHAGE DU FORMULAIRE avec données en base
 if ($_SERVER['REQUEST_METHOD'] === 'GET') {
 
-$idjoueur=$_GET['idmatch'];
+$idmatch=$_GET['idmatch'];
 
-    $row = matchs_trouver($pdo, $idjoueur);
+    $row = matchs_trouver($pdo, $idmatch);
     $idmatch = $row['IDMATCH'];
     $date = $row['DATE'];
     $heure = $row['HEURE'];
@@ -18,6 +19,8 @@ $idjoueur=$_GET['idmatch'];
     $victoire=$row['VICTOIRE'];
     $resultat=$row['RESULTAT'];
 $titre="Modifier le match";
+
+$inscrits = allParticipants($pdo, $idmatch);
 
 require __DIR__ . '/menu.php'; ?>
 </h2>
@@ -35,6 +38,30 @@ Victoire (1=oui, 0=non)  :<input type="text" name="VICTOIRE" value="<?php echo $
 Résultat :<input type="text" name="RESULTAT" value="<?php echo $resultat; ?>"><br>
 <input type="submit" value="Sauvegarder">
 </form>
+
+<form action="index.php?controleur=match&action=noter" method="post">
+<table>
+                <thead>
+                        <tr><th colspan="5"> Joueurs inscrits a ce match :</th></tr>
+                <tr>
+                        <th>Nom</h>
+                        <th>No Licence</th>
+                        <th>Poste</th>
+                        <th>Titulaire</th>
+                        <th>Note</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <?php
+                    foreach ($inscrits as $joueurOccupe) {
+                        echo "<tr><td>" . $joueurOccupe['NOM'] . "  " . $joueurOccupe['PRENOM'] . "</td><td>" . $joueurOccupe['NUMERODELICENCE'] . "</td><td>" . $joueurOccupe['POSTE'] . "</td><td>" . $joueurOccupe['TITULAIRE'];
+                        echo "</td><td>" . "<a href='index.php?controleur=feuille&action=retirer&idmatch=" . $idmatch . "&idjoueur=" . $joueurOccupe['IDJOUEUR'] . "'> retirer du match </a>" . "</td></tr>";
+                    }
+                    ?>
+
+                </tbody>
+            </table>
+            </form>
 
 </body>
 </html>

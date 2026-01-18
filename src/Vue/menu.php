@@ -16,7 +16,7 @@
     <div class="container2">
         <div class="col-menu">
             <a href="index.php">Sortir</a> <br>
-            <a href="index.php?controleur=accueil&action=menu">Menu général</a> <br>
+            <a href="index.php?controleur=accueil&action=menuGen">Menu général</a> <br>
             <a href="index.php?controleur=joueur&action=liste">Joueurs</a> <br>
             <a href="index.php?controleur=match&action=liste">Matchs</a> <br>
             <a href="index.php?controleur=stat&action=liste">Statistiques</a> <br>

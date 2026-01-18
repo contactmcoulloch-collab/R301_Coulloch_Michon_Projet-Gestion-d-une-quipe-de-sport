@@ -48,9 +48,13 @@ switch ($controleur) {
         }
         break;
 
-    // case 'stats':
-    //     require __DIR__ . '/src/controleurs/stats_controleur.php';
-    //     break;
+    case 'stats':
+        if ($action == 'liste') {
+            require __DIR__ . '/src/Vue/PageStats.php';
+        } else {
+            require __DIR__ . '/src/Vue/PageStats.php';
+        }
+        break;
 
     case 'accueil':
         if ($action == 'connecter') {
