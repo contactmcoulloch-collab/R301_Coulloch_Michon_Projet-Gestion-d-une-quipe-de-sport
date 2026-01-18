@@ -31,7 +31,7 @@ switch ($controleur) {
         } else if ($action == 'supprimer') {
             require __DIR__ . '/src/Vue/supprMatch.php';
         } else if ($action == 'feuille') {
-            require __DIR__ . '/src/Vue/PageFeuilleDeMatch.php';
+            require __DIR__ . '/src/Vue/PagefeuilleDeMatch.php';
         } else if ($action == 'noter') {
             require __DIR__ . '/src/Vue/modifMatch.php';
         }
@@ -41,13 +41,13 @@ switch ($controleur) {
         break;
     case 'feuille':
         if ($action == 'liste') {
-            require __DIR__ . '/src/Vue/PageFeuilleDeMatch.php';
+            require __DIR__ . '/src/Vue/PagefeuilleDeMatch.php';
         } else if ($action == 'ajouter') {
-            require __DIR__ . '/src/Vue/PageFeuilleDeMatch.php';
+            require __DIR__ . '/src/Vue/PagefeuilleDeMatch.php';
         } else if ($action == 'preparer') {
-            require __DIR__ . '/src/Vue/PageFeuilleDeMatch.php';
+            require __DIR__ . '/src/Vue/PagefeuilleDeMatch.php';
         } else if ($action == 'retirer') {
-            require __DIR__ . '/src/Vue/PageFeuilleDeMatch.php';
+            require __DIR__ . '/src/Vue/PagefeuilleDeMatch.php';
         }
         break;
 
